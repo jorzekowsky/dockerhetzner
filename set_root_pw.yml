@@ -1,6 +1,11 @@
 ---
 - hosts: all
+  become: yes
+  vars:
+    - password: $6$UB0F8IsGS$CwPcPf95jgjJk2/EFbcR4DMz9qlOGMBvaZ6yJCBE5KdsYIoFQvULvVyPs6baR/nWX.XA39MWQoqj9E68zrioD/
+    # generate pw with: mkpasswd --method=sha-512
+
   tasks:
     - name: Change root password
       become: true
-      user: name=root update_password=always password=AHachei4
+      user: name=root update_password=always password={{ password }}
