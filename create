@@ -10,4 +10,5 @@ else
   echo "no terraforming needed"
 fi
 
+ansible-playbook -i inventory -e 'ansible_python_interpreter=/usr/bin/python3' -u root set_root_pw.yml
 ansible-playbook -i inventory -e 'ansible_python_interpreter=/usr/bin/python3' -u root install_docker.yml

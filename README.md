@@ -13,6 +13,7 @@ creates a server in the hetzner cloud and installs docker and docker-compose
 ## test
 - ``myip=`cat terraform.tfstate | jq --raw-output '.resources[].instances[].attributes | select(.name != null) | select(.name|contains("docker")) | .ipv4_address'` ``
 - `ssh root@${myip}`
+- `ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no root@${myip}`
 
 ## delete
 - `terraform destroy`
