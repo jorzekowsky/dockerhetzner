@@ -2,10 +2,31 @@
 - hosts: all
   become: yes
   vars:
-    - password: $6$UB0F8IsGS$CwPcPf95jgjJk2/EFbcR4DMz9qlOGMBvaZ6yJCBE5KdsYIoFQvULvVyPs6baR/nWX.XA39MWQoqj9E68zrioD/
-    # generate pw with: mkpasswd --method=sha-512
+    - password: $6$XaxR4X9ZG$UxTXLGEXgN1LtkMOaA341byKaP23/juevbCloDjJi42XFXhzRqgdB2PyKYceKi9OLg6iQG2QprXmIdOjeuj5N1
+    # generate pw with: mkpasswd --method=sha-512 -> eimah8Qu
 
   tasks:
     - name: Change root password
       become: true
       user: name=root update_password=always password={{ password }}
+
+    - name: create ssh dir
+      file:
+        path: ~/.ssh
+        owner: root
+        group: root
+        mode: "0700"
+    - name: Copy file with owner and permissions
+      copy:
+        src: ./ssh/id_rsa
+        dest: ~/.ssh/id_rsa
+        owner: root
+        group: root
+        mode: "0600"
+    - name: Copy file with owner and permissions
+      copy:
+        src: ./ssh/id_rsa.pub
+        dest: ~/.ssh/id_rsa.pub
+        owner: root
+        group: root
+        mode: "0600"
