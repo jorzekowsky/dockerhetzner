@@ -17,3 +17,7 @@ creates a server in the hetzner cloud and installs docker and docker-compose
 
 ## delete
 - `terraform destroy`
+
+
+## create multiple server
+`git clone git@github.com:jorzekowsky/dockerhetzner.git NAME`
