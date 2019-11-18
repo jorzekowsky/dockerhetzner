@@ -1,0 +1,13 @@
+#!/bin/bash
+terraform plan -detailed-exitcode
+if [ $? -ne 0 ]; then
+  echo "some terraforming to do"
+  terraform apply -auto-approve
+  bash ./state-extractor.sh
+  echo "wait 60s after vm creation (otherwise apt may not be ready)"
+  sleep 60
+else
+  echo "no terraforming needed"
+fi
+
+ansible-playbook -i inventory -e 'ansible_python_interpreter=/usr/bin/python3' -u root install_docker.yml

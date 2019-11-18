@@ -1,0 +1,3 @@
+hcloud_token = "HCLOUD-TOKEN"
+ssh_keys = ["ssh-key-name"]
+name = "test"
